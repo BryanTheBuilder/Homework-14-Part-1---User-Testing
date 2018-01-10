@@ -15,6 +15,8 @@ import nyc.c4q.MovieDBUserTest.R;
  */
 public class MyMoviesFragment extends Fragment {
 
+    View rootView;
+
 
     public MyMoviesFragment() {
         // Required empty public constructor
@@ -24,9 +26,8 @@ public class MyMoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        rootView = inflater.inflate(R.layout.fragment_movies2, container, false);
+        return rootView;
     }
 
 }
