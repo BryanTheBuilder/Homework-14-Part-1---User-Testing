@@ -3,10 +3,10 @@ package nyc.c4q.MovieDBUserTest.Models;
 import java.util.List;
 
 /**
- * Created by c4q on 1/8/18.
+ * Created by c4q on 1/11/18.
  */
 
-public class Popular {
+public class Movie {
 
   private int page;
   private List<Results> results;
