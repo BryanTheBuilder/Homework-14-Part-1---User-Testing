@@ -3,8 +3,10 @@ package nyc.c4q.MovieDBUserTest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import java.util.List;
 import nyc.c4q.MovieDBUserTest.API.MovieDBApi;
 import nyc.c4q.MovieDBUserTest.Models.Movie;
+import nyc.c4q.MovieDBUserTest.Models.MovieResults;
 import nyc.c4q.MovieDBUserTest.Models.TV;
 import nyc.c4q.MovieDBUserTest.Service.MovieDatabaseServiceGenerator;
 import nyc.c4q.MovieDBUserTest.constants.Genres;
@@ -26,10 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
     movieCall.enqueue(new Callback<Movie>() {
       @Override public void onResponse(Call<Movie> call, Response<Movie> response) {
-        Log.d(TAG, "onResponse:    #of Pages "
-            + response.body().getTotal_pages()
-            + " movies per page "
-            + response.body().getResults().size());
+        //Log.d(TAG, "onResponse:    #of Pages "
+        //    + response.body().getTotal_pages()
+        //    + " movies per page "
+        //    + response.body().getResults().size());
+
+        List<MovieResults> movieList  = response.body().getResults();
+
+        for(MovieResults movieResults : movieList){
+          Log.d(TAG, movieResults.toString());
+        }
       }
 
       @Override public void onFailure(Call<Movie> call, Throwable t) {
