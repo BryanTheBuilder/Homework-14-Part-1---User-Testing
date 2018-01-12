@@ -6,19 +6,16 @@ import java.util.List;
  * Created by c4q on 1/11/18.
  */
 
-public class Movie {
+public class TV {
 
   private int page;
-  private List<MovieResults> results;
   private int total_results;
   private int total_pages;
 
+  private List<TvResults> tvresults;
+
   public int getPage() {
     return page;
-  }
-
-  public List<MovieResults> getResults() {
-    return results;
   }
 
   public int getTotal_results() {
@@ -28,4 +25,9 @@ public class Movie {
   public int getTotal_pages() {
     return total_pages;
   }
+
+  public List<TvResults> getResults() {
+    return tvresults;
+  }
+
 }
