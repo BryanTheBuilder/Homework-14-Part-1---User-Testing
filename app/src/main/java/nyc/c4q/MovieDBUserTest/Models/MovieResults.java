@@ -2,7 +2,7 @@ package nyc.c4q.MovieDBUserTest.Models;
 
 import java.util.List;
 
-public class Results {
+public class MovieResults {
   private String poster_path;
   private boolean adult;
   private String overview;
