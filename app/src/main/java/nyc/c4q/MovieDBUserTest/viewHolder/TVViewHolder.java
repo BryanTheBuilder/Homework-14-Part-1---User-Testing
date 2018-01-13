@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import nyc.c4q.MovieDBUserTest.DetailActivity;
 import nyc.c4q.MovieDBUserTest.Models.TvResults;
 import nyc.c4q.MovieDBUserTest.R;
@@ -37,8 +39,20 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
                 goToDetailActvity.putExtra("title",results.getOriginal_name());
                 goToDetailActvity.putExtra("release",results.getFirst_air_date());
                 goToDetailActvity.putExtra("rating",results.getVote_average());
+                goToDetailActvity.putExtra("lang",results.getOriginal_language());
                 goToDetailActvity.putExtra("desc",results.getOverview());
                 goToDetailActvity.putExtra("poster",fullImagePath.toString());
+                List<String> countries = results.getOrigin_country();
+                StringBuilder countryList = new StringBuilder();
+                for(int i = 0;i < countries.size();i++){
+                    if(i == countries.size()-1){
+                        countryList.append(countries.get(i));
+                    }else {
+                        countryList.append(countries.get(i));
+                        countryList.append(", ");
+                    }
+                }
+                goToDetailActvity.putExtra("country",countryList.toString());
                 itemView.getContext().startActivity(goToDetailActvity);
 
             }

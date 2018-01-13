@@ -10,7 +10,7 @@
         android:id="@+id/detail_title"
         android:layout_width="366dp"
         android:layout_height="41dp"
-        android:text="TextView"
+        android:text="Title"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteY="16dp" />
 
@@ -24,7 +24,7 @@
         android:id="@+id/detail_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Release date:"
         app:layout_constraintTop_toBottomOf="@+id/detail_title"
         app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
 
@@ -37,25 +37,40 @@
         app:layout_constraintTop_toBottomOf="@+id/detail_release"
         app:layout_constraintLeft_toRightOf="@+id/detail_image" />
     <TextView
+        android:id="@+id/detail_votes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votes"
+        app:layout_constraintTop_toBottomOf="@+id/detail_release"
+        app:layout_constraintLeft_toRightOf="@+id/detail_rating_bar" />
+    <TextView
         android:id="@+id/detail_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/detail_release"
-        app:layout_constraintLeft_toRightOf="@+id/detail_rating_bar" />
+        android:text="Rating"
+        app:layout_constraintTop_toBottomOf="@+id/detail_votes"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image" />
+
+    <TextView
+        android:id="@+id/detail_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country"
+        app:layout_constraintTop_toBottomOf="@+id/detail_rating"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
 
     <TextView
         android:id="@+id/detail_language"
         android:layout_width="163dp"
         android:layout_height="48dp"
-        android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/detail_rating"
+        android:text="Language"
+        app:layout_constraintTop_toBottomOf="@+id/detail_country"
         app:layout_constraintLeft_toRightOf="@+id/detail_image" />
 
     <TextView
         android:id="@+id/detail_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Description"
         app:layout_constraintTop_toBottomOf="@+id/detail_image" />
 </android.support.constraint.ConstraintLayout>
