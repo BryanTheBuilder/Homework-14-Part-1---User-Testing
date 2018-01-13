@@ -26,9 +26,9 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(MovieResults results) {
         movieTitle.setText(results.getTitle());
-        movieReleaseDate.setText(results.getRelease_date());
-        Picasso.with(itemView.getContext())
-                .load(results.getPoster_path())
-                .into(moviePoster);
+        //movieReleaseDate.setText(results.getRelease_date());
+        //Picasso.with(itemView.getContext())
+        //        .load(results.getPoster_path())
+        //        .into(moviePoster);
     }
 }

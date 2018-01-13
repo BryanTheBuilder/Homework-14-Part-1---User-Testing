@@ -22,7 +22,7 @@ public interface MovieDBApi {
       @Query("sort_by") String sort, @Query("page") int pageNum,
       @Query("with_genres") String genre);
 
-  @GET("3/discover/tv?&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false")
+  @GET("3/discover/tv?")
   Call <TV> getTvDiscover(@Query("api_key") String key, @Query("language") String language,
       @Query("sort_by") String sort, @Query("page") int pageNum, @Query("timezone") String timeZone,
       @Query("with_genres") String genre);
