@@ -19,9 +19,9 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     public MovieViewHolder(View itemView) {
         super(itemView);
         movieTitle = itemView.findViewById(R.id.movie_title);
-        movieGenre = itemView.findViewById(R.id.movie_genre);
-        moviePoster = itemView.findViewById(R.id.movie_poster);
-        movieReleaseDate = itemView.findViewById(R.id.movie_release_date);
+        //movieGenre = itemView.findViewById(R.id.movie_genre);
+        //moviePoster = itemView.findViewById(R.id.movie_poster);
+      //  movieReleaseDate = itemView.findViewById(R.id.movie_release_date);
     }
 
     public void onBind(MovieResults results) {
