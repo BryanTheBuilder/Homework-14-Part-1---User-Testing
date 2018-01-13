@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import nyc.c4q.MovieDBUserTest.fragments.HomeFragment;
 import nyc.c4q.MovieDBUserTest.fragments.MoviesFragment;
 import nyc.c4q.MovieDBUserTest.fragments.TVFragments;
 
