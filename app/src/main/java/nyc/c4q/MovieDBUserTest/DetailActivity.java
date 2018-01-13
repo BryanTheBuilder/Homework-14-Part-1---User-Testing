@@ -3,6 +3,7 @@ package nyc.c4q.MovieDBUserTest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -18,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView rating;
     ImageView poster;
     TextView desc;
+    RatingBar ratingBar;
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         rating = findViewById(R.id.detail_rating);
         poster = findViewById(R.id.detail_image);
         desc = findViewById(R.id.detail_desc);
+        ratingBar = findViewById(R.id.detail_rating_bar);
         getIntents();
     }
 
@@ -41,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         title.setText(extras.getString("title"));
         rating.setText(Double.toString(extras.getDouble("rating")));
         desc.setText(extras.getString("desc"));
+        ratingBar.setNumStars((int) extras.getDouble("rating")/2);
         Picasso.with(getBaseContext()).load(extras.getString("poster")).into(poster);
     }
 
