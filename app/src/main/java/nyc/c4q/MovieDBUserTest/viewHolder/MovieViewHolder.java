@@ -16,7 +16,6 @@ import nyc.c4q.MovieDBUserTest.Models.MovieResults;
 import nyc.c4q.MovieDBUserTest.R;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
-
     private TextView movieTitle, movieGenre, movieReleaseDate;
     private ImageView moviePoster;
 
@@ -31,12 +30,12 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
         String url = "http://image.tmdb.org/t/p/w185/";
         String path = results.getPoster_path();
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append(url);
-        sb.append(path);
+        final StringBuilder fullImagePath = new StringBuilder();
+        fullImagePath.append(url);
+        fullImagePath.append(path);
 
         Picasso.with(itemView.getContext())
-                .load(sb.toString())
+                .load(fullImagePath.toString())
                 .into(moviePoster);
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +47,12 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
                 goToDetailActivity.putExtra("rating", results.getVote_average());
                 goToDetailActivity.putExtra("lang", results.getOriginal_language());
                 goToDetailActivity.putExtra("desc", results.getOverview());
-                goToDetailActivity.putExtra("poster", sb.toString());
+                goToDetailActivity.putExtra("poster", fullImagePath.toString());
+                goToDetailActivity.putExtra("votes",results.getVote_count());
+                goToDetailActivity.putExtra("language",results.getOriginal_language());
+
+
+
                 itemView.getContext().startActivity(goToDetailActivity);
 
             }
