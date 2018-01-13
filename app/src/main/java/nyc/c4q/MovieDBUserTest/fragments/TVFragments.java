@@ -28,7 +28,7 @@ public class TVFragments extends Fragment {
     private static final String TAG = "JSON?";
     private View rootView;
     private RecyclerView tvRecycler;
-    private LinearLayoutManager linearLayoutManager;
+    private GridLayoutManager gridLayoutManager;
     private TVAdapter tvAdapter;
 
     public TVFragments() {
@@ -51,14 +51,11 @@ public class TVFragments extends Fragment {
             public void onResponse(Call<TV> call, Response<TV> response) {
                 TV tv = response.body();
                 List<TvResults> tvList = tv.getResults();
-                Log.d("size",tv.getTotal_results()+"");
                 tvRecycler = rootView.findViewById(R.id.tv_recyclerview);
                 tvAdapter = new TVAdapter(getContext(),tvList);
-                //tvAdapter.listResults(tvList);
-                linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                gridLayoutManager = new GridLayoutManager(getContext(),2);
                 tvRecycler.setAdapter(tvAdapter);
-                tvRecycler.setLayoutManager(linearLayoutManager);
-
+                tvRecycler.setLayoutManager(gridLayoutManager);
             }
 
             @Override
