@@ -19,16 +19,20 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     public MovieViewHolder(View itemView) {
         super(itemView);
         movieTitle = itemView.findViewById(R.id.movie_title);
-        //movieGenre = itemView.findViewById(R.id.movie_genre);
-        //moviePoster = itemView.findViewById(R.id.movie_poster);
-      //  movieReleaseDate = itemView.findViewById(R.id.movie_release_date);
+        moviePoster = itemView.findViewById(R.id.movie_poster);
     }
 
     public void onBind(MovieResults results) {
         movieTitle.setText(results.getTitle());
-        //movieReleaseDate.setText(results.getRelease_date());
-        //Picasso.with(itemView.getContext())
-        //        .load(results.getPoster_path())
-        //        .into(moviePoster);
+        String url = "http://image.tmdb.org/t/p/w185/";
+        String path = results.getPoster_path();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(url);
+        sb.append(path);
+
+        Picasso.with(itemView.getContext())
+                .load(sb.toString())
+                .into(moviePoster);
     }
 }
