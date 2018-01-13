@@ -15,11 +15,11 @@ import nyc.c4q.MovieDBUserTest.viewHolder.TVViewHolder;
 
 public class TVAdapter extends RecyclerView.Adapter<TVViewHolder> {
 
-    private List<TvResults> resultsList;
+    private List<TvResults> resultsList = new ArrayList<>();
     private Context context;
 
-    public TVAdapter(Context context) {
-        resultsList = new ArrayList<>();
+    public TVAdapter(Context context, List<TvResults> tvResults) {
+        this.resultsList = tvResults;
         this.context = context;
     }
 
