@@ -36,25 +36,25 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 Intent goToDetailActivity = new Intent(itemView.getContext(), DetailActivity.class);
-                goToDetailActivity.putExtra("title",results.getOriginal_name());
-                goToDetailActivity.putExtra("release",results.getFirst_air_date());
-                goToDetailActivity.putExtra("rating",results.getVote_average());
-                goToDetailActivity.putExtra("lang",results.getOriginal_language());
-                goToDetailActivity.putExtra("desc",results.getOverview());
-                goToDetailActivity.putExtra("poster",fullImagePath.toString());
+                goToDetailActivity.putExtra("title", results.getOriginal_name());
+                goToDetailActivity.putExtra("release", results.getFirst_air_date());
+                goToDetailActivity.putExtra("rating", results.getVote_average());
+                goToDetailActivity.putExtra("votes", results.getVote_count());
+                goToDetailActivity.putExtra("lang", results.getOriginal_language());
+                goToDetailActivity.putExtra("desc", results.getOverview());
+                goToDetailActivity.putExtra("poster", fullImagePath.toString());
                 List<String> countries = results.getOrigin_country();
                 StringBuilder countryList = new StringBuilder();
-                for(int i = 0;i < countries.size();i++){
-                    if(i == countries.size()-1){
+                for (int i = 0; i < countries.size(); i++) {
+                    if (i == countries.size() - 1) {
                         countryList.append(countries.get(i));
-                    }else {
+                    } else {
                         countryList.append(countries.get(i));
                         countryList.append(", ");
                     }
                 }
-                goToDetailActivity.putExtra("country",countryList.toString());
+                goToDetailActivity.putExtra("country", countryList.toString());
                 itemView.getContext().startActivity(goToDetailActivity);
-
             }
         });
     }
