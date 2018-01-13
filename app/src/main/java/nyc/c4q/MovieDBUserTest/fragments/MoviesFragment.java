@@ -63,13 +63,13 @@ public class MoviesFragment extends Fragment {
                     Movie movie = response.body();
                     List<MovieResults> resultsList = movie.getResults();
                     Log.d("MOVIE", "onResponse: " + resultsList.size());
-                    //
-                    //movieRecycler = rootView.findViewById(R.id.movie_rv);
-                    //movieAdapter = new MovieAdapter(getContext() , resultsList);
-                    //linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    //
-                    //movieRecycler.setAdapter(movieAdapter);
-                    //movieRecycler.setLayoutManager(linearLayoutManager);
+
+                    movieRecycler = rootView.findViewById(R.id.movie_rv);
+                    movieAdapter = new MovieAdapter(getContext() , resultsList);
+                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+                    movieRecycler.setAdapter(movieAdapter);
+                    movieRecycler.setLayoutManager(linearLayoutManager);
                 }
             }
 
