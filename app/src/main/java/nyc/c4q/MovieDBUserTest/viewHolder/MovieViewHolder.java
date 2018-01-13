@@ -36,6 +36,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         Picasso.with(itemView.getContext())
                 .load(fullImagePath.toString())
+                .error(R.drawable.broken_image)
                 .into(moviePoster);
 
         itemView.setOnClickListener(new View.OnClickListener() {
