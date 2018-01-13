@@ -2,6 +2,7 @@ package nyc.c4q.MovieDBUserTest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,56 +31,50 @@ import static nyc.c4q.MovieDBUserTest.MainActivity.DBCallback;
  */
 public class MoviesFragment extends Fragment {
 
-    private View rootView;
-    private RecyclerView movieRecycler;
-    private LinearLayoutManager linearLayoutManager;
-    private MovieAdapter movieAdapter;
-    private Retrofit retrofit;
-    private static final String API_KEY = "";
-    private boolean loadMovieData;
+  private View rootView;
+  private RecyclerView movieRecycler;
+  private GridLayoutManager gridLayoutManager;
+  private MovieAdapter movieAdapter;
+  private static final String API_KEY = "";
 
-    public MoviesFragment() {
-        // Required empty public constructor
-    }
+  public MoviesFragment() {
+    // Required empty public constructor
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-     rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        getMovieData();
+    getMovieData();
 
-        return rootView;
-    }
+    return rootView;
+  }
 
-    public void getMovieData() {
+  public void getMovieData() {
 
-        Call<Movie> movieCall = DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119","en-US","popularity.desc",5,
-            null);
-        movieCall.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                if (response.isSuccessful()) {
-                    Movie movie = response.body();
-                    List<MovieResults> resultsList = movie.getResults();
-                    Log.d("MOVIE", "onResponse: " + resultsList.size());
+    Call<Movie> movieCall =
+        DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "popularity.desc",
+            5, null);
+    movieCall.enqueue(new Callback<Movie>() {
+      @Override public void onResponse(Call<Movie> call, Response<Movie> response) {
+        if (response.isSuccessful()) {
+          Movie movie = response.body();
+          List<MovieResults> resultsList = movie.getResults();
+          Log.d("MOVIE", "onResponse: " + resultsList.size());
 
-                    movieRecycler = rootView.findViewById(R.id.movie_rv);
-                    movieAdapter = new MovieAdapter(getContext() , resultsList);
-                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+          movieRecycler = rootView.findViewById(R.id.movie_rv);
+          movieAdapter = new MovieAdapter(getContext(), resultsList);
+          gridLayoutManager =
+              new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+          movieRecycler.setAdapter(movieAdapter);
+          movieRecycler.setLayoutManager(gridLayoutManager);
+        }
+      }
 
-                    movieRecycler.setAdapter(movieAdapter);
-                    movieRecycler.setLayoutManager(linearLayoutManager);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                loadMovieData = true;
-                Log.d("MOVIE", "onFailure: " + call.request());
-                t.printStackTrace();
-            }
-        });
-    }
-
+      @Override public void onFailure(Call<Movie> call, Throwable t) {
+        Log.d("MOVIE", "onFailure: " + call.request());
+        t.printStackTrace();
+      }
+    });
+  }
 }
