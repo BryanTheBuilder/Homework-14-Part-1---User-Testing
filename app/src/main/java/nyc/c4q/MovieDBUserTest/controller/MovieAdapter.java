@@ -11,16 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.MovieDBUserTest.Models.MovieResults;
-import nyc.c4q.MovieDBUserTest.Models.MovieResults;
 import nyc.c4q.MovieDBUserTest.R;
 import nyc.c4q.MovieDBUserTest.viewHolder.MovieViewHolder;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
-    private List<MovieResults> resultsList;
+    private List<MovieResults> resultsList = new ArrayList<>();
     private Context context;
 
-    public MovieAdapter(Context context) {
-        resultsList = new ArrayList<>();
+    public MovieAdapter(Context context, List<MovieResults> resultsList) {
+        this.resultsList = resultsList;
         this.context = context;
     }
 
@@ -31,7 +30,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_itemview, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_tv, parent, false);
         return new MovieViewHolder(view);
     }
 
