@@ -12,7 +12,7 @@ public class TV {
   private int total_results;
   private int total_pages;
 
-  private List<TvResults> tvresults;
+  private List<TvResults> results;
 
   public int getPage() {
     return page;
@@ -27,7 +27,7 @@ public class TV {
   }
 
   public List<TvResults> getResults() {
-    return tvresults;
+    return results;
   }
 
 }

@@ -17,19 +17,14 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
 
     public TVViewHolder(View itemView) {
         super(itemView);
-        //tvTitle = itemView.findViewById(R.id.tv_title);
-        //tvOverview = itemView.findViewById(R.id.tv_overview);
-        //tvGenre = itemView.findViewById(R.id.tv_genre);
-        //tvAirDate = itemView.findViewById(R.id.tv_air_date);
-        //tvPoster = itemView.findViewById(R.id.tv_poster);
+        tvTitle = itemView.findViewById(R.id.tv_title);
+        tvPoster = itemView.findViewById(R.id.tv_poster);
     }
 
     public void onBind(TvResults results) {
-        //tvTitle.setText(results.getName());
-        //tvOverview.setText(results.getOverview());
-        //tvAirDate.setText(results.getFirst_air_date());
-        //Picasso.with(itemView.getContext())
-        //        .load(results.getPoster_path())
-        //        .into(tvPoster);
+        tvTitle.setText(results.getName());
+        Picasso.with(itemView.getContext())
+                .load(results.getPoster_path())
+                .into(tvPoster);
     }
 }
