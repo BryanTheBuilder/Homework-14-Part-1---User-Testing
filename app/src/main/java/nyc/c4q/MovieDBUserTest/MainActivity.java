@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
   private void fragmentTabLayout() {
 
     TabLayout tabLayout = findViewById(R.id.main_tab_layout);
-    tabLayout.addTab(tabLayout.newTab().setText("Home"));
     tabLayout.addTab(tabLayout.newTab().setText("Movies"));
     tabLayout.addTab(tabLayout.newTab().setText("TV"));
     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
