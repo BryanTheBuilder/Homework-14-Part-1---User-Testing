@@ -49,17 +49,14 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getIntents() {
         Bundle extras = getIntent().getExtras();
-
-        StringBuilder releaseText = new StringBuilder();
-        releaseText.append(extras.getString("release"));
-        release.setText(releaseText.toString());
+        release.setText(extras.getString("release"));
         title.setText(extras.getString("title"));
         rating.setText(Double.toString(extras.getDouble("rating")));
         desc.setText(extras.getString("desc"));
         ratingBar.setRating((float) extras.getDouble("rating") / 2);
         voteCount.setText("(" + extras.get("votes") + ")");
-        language.setText(extras.getString("language").toUpperCase());
+        language.setText(extras.getString("lang").toUpperCase());
+        country.setText(extras.getString("country"));
         Picasso.with(getBaseContext()).load(extras.getString("poster")).into(poster);
     }
-
 }
