@@ -15,11 +15,11 @@ import nyc.c4q.MovieDBUserTest.viewHolder.TVViewHolder;
 
 public class TVAdapter extends RecyclerView.Adapter<TVViewHolder> {
 
-    private List<TvResults> resultsList;
+    private List<TvResults> resultsList = new ArrayList<>();
     private Context context;
 
-    public TVAdapter(Context context) {
-        resultsList = new ArrayList<>();
+    public TVAdapter(Context context, List<TvResults> tvResults) {
+        this.resultsList = tvResults;
         this.context = context;
     }
 
@@ -30,7 +30,7 @@ public class TVAdapter extends RecyclerView.Adapter<TVViewHolder> {
 
     @Override
     public TVViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tv_itemview, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_tv, parent, false);
         return new TVViewHolder(view);
     }
 
