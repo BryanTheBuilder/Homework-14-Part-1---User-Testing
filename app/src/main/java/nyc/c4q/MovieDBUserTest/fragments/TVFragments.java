@@ -86,7 +86,7 @@ public class TVFragments extends Fragment {
     }
 
     public void getTVData() {
-        Call<TV> tvCall = DBCallback.getTvDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "popularity.desc", 1,
+        Call<TV> tvCall = DBCallback.getTvDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "original_title.asc", 1,
                 null, null);
         tvCall.enqueue(new Callback<TV>() {
             @Override
