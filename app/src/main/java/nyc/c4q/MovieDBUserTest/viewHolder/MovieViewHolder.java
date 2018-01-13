@@ -19,14 +19,11 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     public MovieViewHolder(View itemView) {
         super(itemView);
         movieTitle = itemView.findViewById(R.id.movie_title);
-        //movieGenre = itemView.findViewById(R.id.movie_genre);
         moviePoster = itemView.findViewById(R.id.movie_poster);
-      //  movieReleaseDate = itemView.findViewById(R.id.movie_release_date);
     }
 
     public void onBind(MovieResults results) {
         movieTitle.setText(results.getTitle());
-        //movieReleaseDate.setText(results.getRelease_date());
         String url = "http://image.tmdb.org/t/p/w185/";
         String path = results.getPoster_path();
 
