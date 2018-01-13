@@ -8,8 +8,10 @@
 
     <TextView
         android:id="@+id/detail_title"
-        android:layout_width="366dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25sp"
         android:text="Title"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteY="16dp" />
@@ -19,13 +21,21 @@
         android:layout_width="186dp"
         android:layout_height="219dp"
         app:layout_constraintTop_toBottomOf="@+id/detail_title" />
+    <TextView
+        android:id="@+id/view_release"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Release date: "
+        app:layout_constraintTop_toBottomOf="@+id/detail_title"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
 
     <TextView
         android:id="@+id/detail_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Release date:"
-        app:layout_constraintTop_toBottomOf="@+id/detail_title"
+        android:text="Release date: "
+        app:layout_constraintTop_toBottomOf="@+id/view_release"
         app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
 
     <RatingBar
@@ -44,12 +54,28 @@
         app:layout_constraintTop_toBottomOf="@+id/detail_release"
         app:layout_constraintLeft_toRightOf="@+id/detail_rating_bar" />
     <TextView
+        android:id="@+id/view_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/detail_votes"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image" />
+    <TextView
         android:id="@+id/detail_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rating"
         app:layout_constraintTop_toBottomOf="@+id/detail_votes"
-        app:layout_constraintLeft_toRightOf="@+id/detail_image" />
+        app:layout_constraintLeft_toRightOf="@+id/view_rating" />
+    <TextView
+        android:id="@+id/view_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Country: "
+        app:layout_constraintTop_toBottomOf="@+id/detail_rating"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
 
     <TextView
         android:id="@+id/detail_country"
@@ -57,20 +83,35 @@
         android:layout_height="wrap_content"
         android:text="Country"
         app:layout_constraintTop_toBottomOf="@+id/detail_rating"
-        app:layout_constraintLeft_toRightOf="@+id/detail_image"/>
+        app:layout_constraintLeft_toRightOf="@+id/view_country"/>
+    <TextView
+        android:id="@+id/view_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Language: "
+        app:layout_constraintTop_toBottomOf="@+id/detail_country"
+        app:layout_constraintLeft_toRightOf="@+id/detail_image" />
 
     <TextView
         android:id="@+id/detail_language"
-        android:layout_width="163dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Language"
         app:layout_constraintTop_toBottomOf="@+id/detail_country"
-        app:layout_constraintLeft_toRightOf="@+id/detail_image" />
+        app:layout_constraintLeft_toRightOf="@+id/view_language" />
+    <TextView
+        android:id="@+id/view_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/detail_image" />
 
     <TextView
         android:id="@+id/detail_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
-        app:layout_constraintTop_toBottomOf="@+id/detail_image" />
+        app:layout_constraintTop_toBottomOf="@+id/view_desc" />
 </android.support.constraint.ConstraintLayout>
