@@ -40,11 +40,14 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getIntents(){
         Bundle extras = getIntent().getExtras();
-        release.setText(extras.getString("release"));
+        StringBuilder releaseText = new StringBuilder();
+        releaseText.append("/<b>Release Date:/</b>\n");
+        releaseText.append(extras.getString("release"));
+        release.setText(releaseText.toString());
         title.setText(extras.getString("title"));
         rating.setText(Double.toString(extras.getDouble("rating")));
         desc.setText(extras.getString("desc"));
-        ratingBar.setNumStars((int) extras.getDouble("rating")/2);
+        ratingBar.setRating((float) extras.getDouble("rating")/2);
         Picasso.with(getBaseContext()).load(extras.getString("poster")).into(poster);
     }
 
