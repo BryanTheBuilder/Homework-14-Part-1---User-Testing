@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_sort_by">
+        <item>Title (Ascending)</item>
+        <item>Title (Descending)</item>
+        <item>Popularity</item>
+        <item>Release Date</item>
+    </string-array>
+</resources>

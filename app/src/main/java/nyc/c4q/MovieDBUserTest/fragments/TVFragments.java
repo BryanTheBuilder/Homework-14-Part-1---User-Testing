@@ -56,6 +56,7 @@ public class TVFragments extends Fragment {
                 gridLayoutManager = new GridLayoutManager(getContext(),2);
                 tvRecycler.setAdapter(tvAdapter);
                 tvRecycler.setLayoutManager(gridLayoutManager);
+
             }
 
             @Override
@@ -63,6 +64,7 @@ public class TVFragments extends Fragment {
                 t.printStackTrace();
             }
         });
+
     }
 
 
