@@ -23,8 +23,10 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(TvResults results) {
         tvTitle.setText(results.getName());
+        StringBuilder fullImagePath = new StringBuilder();
+        fullImagePath.append("http://image.tmdb.org/t/p/w185/");
+        fullImagePath.append(results.getPoster_path());
         Picasso.with(itemView.getContext())
-                .load(results.getPoster_path())
-                .into(tvPoster);
+                .load(fullImagePath.toString()).into(tvPoster);
     }
 }
