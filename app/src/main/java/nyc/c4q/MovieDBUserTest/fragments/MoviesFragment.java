@@ -93,7 +93,7 @@ public class MoviesFragment extends Fragment {
     public void getMovieData() {
 
         Call<Movie> movieCall =
-                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "popularity.desc",
+                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "original_title.asc",
                         1, null);
         movieCall.enqueue(new Callback<Movie>() {
             @Override

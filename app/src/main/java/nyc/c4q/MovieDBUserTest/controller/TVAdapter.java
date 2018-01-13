@@ -15,6 +15,10 @@ import nyc.c4q.MovieDBUserTest.viewHolder.TVViewHolder;
 
 public class TVAdapter extends RecyclerView.Adapter<TVViewHolder> {
 
+
+    private static final int TVITEM = 0;
+    private static final int TVLOADING = 1;
+
     private List<TvResults> resultsList = new ArrayList<>();
     private Context context;
 
