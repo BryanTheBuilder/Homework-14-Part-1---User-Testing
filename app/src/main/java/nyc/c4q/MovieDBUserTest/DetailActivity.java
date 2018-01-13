@@ -40,10 +40,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getIntents(){
         Bundle extras = getIntent().getExtras();
-        StringBuilder releaseText = new StringBuilder();
-        releaseText.append("/<b>Release Date:/</b>\n");
-        releaseText.append(extras.getString("release"));
-        release.setText(releaseText.toString());
+        release.setText(extras.getString("release"));
         title.setText(extras.getString("title"));
         rating.setText(Double.toString(extras.getDouble("rating")));
         desc.setText(extras.getString("desc"));
