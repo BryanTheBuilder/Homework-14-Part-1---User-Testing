@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         release.setText(extras.getString("release"));
         title.setText(extras.getString("title"));
-        rating.setText(Double.toString(extras.getDouble("rating")));
+        rating.setText(Double.toString(extras.getDouble("rating"))+"/10");
         desc.setText(extras.getString("desc"));
         ratingBar.setRating((float) extras.getDouble("rating") / 2);
         voteCount.setText("(" + extras.get("votes") + ")");
