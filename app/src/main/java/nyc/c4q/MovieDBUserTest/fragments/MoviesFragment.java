@@ -1,5 +1,6 @@
 package nyc.c4q.MovieDBUserTest.fragments;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -138,8 +139,12 @@ public class MoviesFragment extends Fragment {
                     gridLayoutManager =
                             new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
                     movieRecycler.setAdapter(movieAdapter);
-                    movieRecycler.setLayoutManager(gridLayoutManager);
-                }
+
+                    if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
+                    } else {
+                        movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 4));
+                    }                }
             }
 
             @Override
