@@ -1,5 +1,6 @@
 package nyc.c4q.MovieDBUserTest.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -34,7 +35,6 @@ public class TVFragments extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private TVAdapter tvAdapter;
     private Spinner sortBy;
-
 
     public TVFragments() {
         // Required empty public constructor
@@ -120,8 +120,12 @@ public class TVFragments extends Fragment {
                 tvAdapter = new TVAdapter(getContext(), tvList);
                 gridLayoutManager = new GridLayoutManager(getContext(), 2);
                 tvRecycler.setAdapter(tvAdapter);
-                tvRecycler.setLayoutManager(gridLayoutManager);
 
+                if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    tvRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
+                } else {
+                    tvRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 4));
+                }
             }
 
             @Override

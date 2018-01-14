@@ -31,7 +31,9 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
         fullImagePath.append("http://image.tmdb.org/t/p/w185/");
         fullImagePath.append(results.getPoster_path());
         Picasso.with(itemView.getContext())
-                .load(fullImagePath.toString()).into(tvPoster);
+                .load(fullImagePath.toString())
+                .error(R.drawable.broken_image)
+                .into(tvPoster);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

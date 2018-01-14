@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
-    <Spinner
-        android:id="@+id/spinner_filter_genre"
+    android:background="@color/colorSecondaryLight"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:entries="@array/spinner_search_genre">
+        android:weightSum="2">
 
-    </Spinner>
+        <Spinner
+            android:id="@+id/spinner_sort_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:entries="@array/spinner_sort_by">
 
-    <Spinner
-      android:id="@+id/spinner_sort_by"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="right"
-      android:entries="@array/spinner_sort_by">
+        </Spinner>
 
-  </Spinner>
-  </LinearLayout>
+        <Spinner
+            android:id="@+id/spinner_filter_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:entries="@array/spinner_search_genre">
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/tv_recyclerview"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      />
+        </Spinner>
 
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tv_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp" />
 
 
 </LinearLayout>

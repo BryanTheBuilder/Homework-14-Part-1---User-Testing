@@ -2,6 +2,7 @@ package nyc.c4q.MovieDBUserTest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         rating = findViewById(R.id.detail_rating);
         poster = findViewById(R.id.detail_image);
         desc = findViewById(R.id.detail_desc);
+        desc.setMovementMethod(new ScrollingMovementMethod());
         ratingBar = findViewById(R.id.detail_rating_bar);
         voteCount = findViewById(R.id.detail_votes);
         language = findViewById(R.id.detail_language);
@@ -51,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         release.setText(extras.getString("release"));
         title.setText(extras.getString("title"));
-        rating.setText(Double.toString(extras.getDouble("rating")));
+        rating.setText(Double.toString(extras.getDouble("rating"))+"/10");
         desc.setText(extras.getString("desc"));
         ratingBar.setRating((float) extras.getDouble("rating") / 2);
         voteCount.setText("(" + extras.get("votes") + ")");
