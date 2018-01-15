@@ -1,6 +1,7 @@
 package nyc.c4q.MovieDBUserTest.fragments;
 
 import android.content.res.Configuration;
+import android.location.GnssClock;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.MovieDBUserTest.Models.TV;
@@ -35,6 +37,10 @@ public class TVFragments extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private TVAdapter tvAdapter;
     private Spinner sortBy;
+    private Spinner genre;
+    private List<TvResults> tvResults = new ArrayList<>();
+    private String sortSelection = null;
+    private String genreSelection = null;
 
     public TVFragments() {
         // Required empty public constructor
@@ -45,35 +51,106 @@ public class TVFragments extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_tv, container, false);
         sortBy = rootView.findViewById(R.id.spinner_sort_by);
+        genre = rootView.findViewById(R.id.spinner_filter_genre);
+        genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                switch (i) {
+                    case 0:
+                        genreSelection = Genres.ACTION.getId();
+                        break;
+                    case 1:
+                        genreSelection = Genres.ADVENTURE.getId();
+                        break;
+                    case 2:
+                        genreSelection = Genres.COMEDY.getId();
+                        break;
+                    case 3:
+                        genreSelection = Genres.CRIME.getId();
+                        break;
+                    case 4:
+                        genreSelection = Genres.DOCUMENTARY.getId();
+                        break;
+                    case 5:
+                        genreSelection = Genres.DRAMA.getId();
+                        break;
+                    case 6:
+                        genreSelection = Genres.FAMILY.getId();
+                        break;
+                    case 7:
+                        genreSelection = Genres.FANTASY.getId();
+                        break;
+                    case 8:
+                        genreSelection = Genres.HISTORY.getId();
+                        break;
+                    case 9:
+                        genreSelection = Genres.HORROR.getId();
+                        break;
+                    case 10:
+                        genreSelection = Genres.MUSIC.getId();
+                        break;
+                    case 11:
+                        genreSelection = Genres.MYSTERY.getId();
+                        break;
+                    case 12:
+                        genreSelection = Genres.ROMANCE.getId();
+                        break;
+                    case 13:
+                        genreSelection = Genres.SCIENCE_FICTION.getId();
+                        break;
+                    case 14:
+                        genreSelection = Genres.TV_MOVIE.getId();
+                        break;
+                    case 15:
+                        genreSelection = Genres.THRILLER.getId();
+                        break;
+                    case 16:
+                        genreSelection = Genres.WAR.getId();
+                        break;
+                    case 17:
+                        genreSelection = Genres.WESTERN.getId();
+                        break;
+                }
+                getTVDataSortGenre(sortSelection, genreSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                getTVDataSortGenre(sortSelection,genreSelection);
+            }
+        });
+
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
 
                     case 0:
-                        getTVDataSort("original_title.asc");
+                        sortSelection = "original_title.asc";
                         break;
                     case 1:
-                        getTVDataSort("original_title.desc");
+                        sortSelection = "original_title.desc";
                         break;
                     case 2:
-                        getTVDataSort("popularity.asc");
+                        sortSelection = "popularity.asc";
                         break;
                     case 3:
-                        getTVDataSort("popularity.desc");
+                        sortSelection = "popularity.desc";
                         break;
                     case 4:
-                        getTVDataSort("release_date.asc");
+                        sortSelection = "release_date.asc";
                         break;
                     case 5:
-                        getTVDataSort("release_date.desc");
+                        sortSelection = "release_date.desc";
                         break;
                 }
+                getTVDataSortGenre(sortSelection, genreSelection);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                getTVData();
+                getTVDataSortGenre(sortSelection,genreSelection);
             }
         });
         ArrayAdapter<CharSequence> sortByAdapter = ArrayAdapter.createFromResource(rootView.getContext(),
@@ -108,9 +185,10 @@ public class TVFragments extends Fragment {
         });
 
     }
-    private void getTVDataSort(String sort) {
+
+    private void getTVDataSortGenre(String sort, String genre) {
         Call<TV> tvCall = DBCallback.getTvDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", sort, 1,
-                null, null);
+                null, genre);
         tvCall.enqueue(new Callback<TV>() {
             @Override
             public void onResponse(Call<TV> call, Response<TV> response) {
