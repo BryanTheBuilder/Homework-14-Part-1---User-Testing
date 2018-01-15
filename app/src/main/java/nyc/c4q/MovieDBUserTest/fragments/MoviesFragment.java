@@ -21,6 +21,7 @@ import java.util.List;
 import nyc.c4q.MovieDBUserTest.Models.Movie;
 import nyc.c4q.MovieDBUserTest.Models.MovieResults;
 import nyc.c4q.MovieDBUserTest.R;
+import nyc.c4q.MovieDBUserTest.constants.Genres;
 import nyc.c4q.MovieDBUserTest.controller.MovieAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +39,10 @@ public class MoviesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private MovieAdapter movieAdapter;
     private Spinner sortBy;
+    private Spinner genre;
+    private String sortSelection = null;
+    private String genreSelection = null;
+
 
     private static final String API_KEY = "";
 
@@ -51,35 +56,106 @@ public class MoviesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
         sortBy = rootView.findViewById(R.id.spinner_sort_by);
+        genre = rootView.findViewById(R.id.spinner_filter_genre);
+        genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        genreSelection = Genres.ACTION.getId();
+                        break;
+                    case 1:
+                        genreSelection = Genres.ADVENTURE.getId();
+                        break;
+                    case 2:
+                        genreSelection = Genres.COMEDY.getId();
+                        break;
+                    case 3:
+                        genreSelection = Genres.CRIME.getId();
+                        break;
+                    case 4:
+                        genreSelection = Genres.DOCUMENTARY.getId();
+                        break;
+                    case 5:
+                        genreSelection = Genres.DRAMA.getId();
+                        break;
+                    case 6:
+                        genreSelection = Genres.FAMILY.getId();
+                        break;
+                    case 7:
+                        genreSelection = Genres.FANTASY.getId();
+                        break;
+                    case 8:
+                        genreSelection = Genres.HISTORY.getId();
+                        break;
+                    case 9:
+                        genreSelection = Genres.HORROR.getId();
+                        break;
+                    case 10:
+                        genreSelection = Genres.MUSIC.getId();
+                        break;
+                    case 11:
+                        genreSelection = Genres.MYSTERY.getId();
+                        break;
+                    case 12:
+                        genreSelection = Genres.ROMANCE.getId();
+                        break;
+                    case 13:
+                        genreSelection = Genres.SCIENCE_FICTION.getId();
+                        break;
+                    case 14:
+                        genreSelection = Genres.TV_MOVIE.getId();
+                        break;
+                    case 15:
+                        genreSelection = Genres.THRILLER.getId();
+                        break;
+                    case 16:
+                        genreSelection = Genres.WAR.getId();
+                        break;
+                    case 17:
+                        genreSelection = Genres.WESTERN.getId();
+                        break;
+                }
+                getMovieDataSortGenre(sortSelection, genreSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                getMovieDataSortGenre(sortSelection, genreSelection);
+
+            }
+        });
+
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
 
                     case 0:
-                        getMovieDataSort("original_title.asc");
+                        sortSelection = "original_title.asc";
                         break;
                     case 1:
-                        getMovieDataSort("original_title.desc");
+                        sortSelection = "original_title.desc";
                         break;
                     case 2:
-                        getMovieDataSort("popularity.asc");
+                        sortSelection = "popularity.asc";
                         break;
                     case 3:
-                        getMovieDataSort("popularity.desc");
+                        sortSelection = "popularity.desc";
                         break;
                     case 4:
-                        getMovieDataSort("release_date.asc");
+                        sortSelection = "release_date.asc";
                         break;
                     case 5:
-                        getMovieDataSort("release_date.desc");
+                        sortSelection = "release_date.desc";
                         break;
                 }
+                getMovieDataSortGenre(sortSelection, genreSelection);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                    getMovieData();
+                getMovieDataSortGenre(sortSelection, genreSelection);
             }
         });
         ArrayAdapter<CharSequence> sortByAdapter = ArrayAdapter.createFromResource(rootView.getContext(),
@@ -94,7 +170,7 @@ public class MoviesFragment extends Fragment {
     public void getMovieData() {
 
         Call<Movie> movieCall =
-                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "original_title.asc",false,
+                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "original_title.asc", false,
                         1, null);
         movieCall.enqueue(new Callback<Movie>() {
             @Override
@@ -121,11 +197,11 @@ public class MoviesFragment extends Fragment {
         });
     }
 
-    public void getMovieDataSort(String sortBy) {
+    public void getMovieDataSortGenre(String sortBy, String genre) {
 
         Call<Movie> movieCall =
-                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", sortBy,false,
-                        1, null);
+                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", sortBy, false,
+                        1, genre);
         movieCall.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
@@ -144,7 +220,8 @@ public class MoviesFragment extends Fragment {
                         movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
                     } else {
                         movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 4));
-                    }                }
+                    }
+                }
             }
 
             @Override
