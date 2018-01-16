@@ -4,20 +4,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import java.util.List;
-import nyc.c4q.MovieDBUserTest.API.MovieDBApi;
-import nyc.c4q.MovieDBUserTest.Models.Movie;
-import nyc.c4q.MovieDBUserTest.Models.MovieResults;
+import nyc.c4q.MovieDBUserTest.API.MovieDBService;
 import nyc.c4q.MovieDBUserTest.Service.MovieDatabaseServiceGenerator;
-import nyc.c4q.MovieDBUserTest.constants.Genres;
 import nyc.c4q.MovieDBUserTest.controller.FragmentAdapter;
-import retrofit2.*;
 
 public class MainActivity extends AppCompatActivity {
 
-  public static final MovieDBApi DBCallback =
-      MovieDatabaseServiceGenerator.createService(MovieDBApi.class);
+  public static final MovieDBService DBCallback = MovieDatabaseServiceGenerator.createService();
 
   private static final String TAG = "JSON?";
 
@@ -26,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     fragmentTabLayout();
-
   }
 
   private void fragmentTabLayout() {

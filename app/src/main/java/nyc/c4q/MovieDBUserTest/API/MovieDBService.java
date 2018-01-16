@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface MovieDBApi {
+public interface MovieDBService {
   @GET("3/discover/movie?") Call<Movie> getMovieDiscover(@Query("api_key") String key,
       @Query("language") String language, @Query("sort_by") String sort, @Query("include_adult") boolean adult ,@Query("page") int pageNum,
       @Query("with_genres") String genre);

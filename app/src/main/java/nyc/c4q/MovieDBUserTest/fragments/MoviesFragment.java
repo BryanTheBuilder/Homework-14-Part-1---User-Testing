@@ -33,125 +33,120 @@ import static nyc.c4q.MovieDBUserTest.MainActivity.DBCallback;
  */
 public class MoviesFragment extends Fragment {
 
-    private View rootView;
-    private RecyclerView movieRecycler;
-    private GridLayoutManager gridLayoutManager;
-    private MovieAdapter movieAdapter;
-    private Spinner sortBy;
+  private View rootView;
+  private RecyclerView movieRecycler;
+  private GridLayoutManager gridLayoutManager;
+  private MovieAdapter movieAdapter;
+  private Spinner sortBy;
 
-    private static final String API_KEY = "";
+  private static final String API_KEY = "";
 
-    public MoviesFragment() {
-        // Required empty public constructor
-    }
+  public MoviesFragment() {
+    // Required empty public constructor
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        sortBy = rootView.findViewById(R.id.spinner_sort_by);
-        sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
+    sortBy = rootView.findViewById(R.id.spinner_sort_by);
+    sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
 
-                    case 0:
-                        getMovieDataSort("original_title.asc");
-                        break;
-                    case 1:
-                        getMovieDataSort("original_title.desc");
-                        break;
-                    case 2:
-                        getMovieDataSort("popularity.asc");
-                        break;
-                    case 3:
-                        getMovieDataSort("popularity.desc");
-                        break;
-                    case 4:
-                        getMovieDataSort("release_date.asc");
-                        break;
-                    case 5:
-                        getMovieDataSort("release_date.desc");
-                        break;
-                }
-            }
+          case 0:
+            getMovieDataSort("original_title.asc");
+            break;
+          case 1:
+            getMovieDataSort("original_title.desc");
+            break;
+          case 2:
+            getMovieDataSort("popularity.asc");
+            break;
+          case 3:
+            getMovieDataSort("popularity.desc");
+            break;
+          case 4:
+            getMovieDataSort("release_date.asc");
+            break;
+          case 5:
+            getMovieDataSort("release_date.desc");
+            break;
+        }
+      }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                    getMovieData();
-            }
-        });
-        ArrayAdapter<CharSequence> sortByAdapter = ArrayAdapter.createFromResource(rootView.getContext(),
-                R.array.spinner_sort_by, android.R.layout.simple_spinner_item);
-        sortByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortBy.setAdapter(sortByAdapter);
-
+      @Override public void onNothingSelected(AdapterView<?> parent) {
         getMovieData();
-        return rootView;
-    }
+      }
+    });
+    ArrayAdapter<CharSequence> sortByAdapter =
+        ArrayAdapter.createFromResource(rootView.getContext(), R.array.spinner_sort_by,
+            android.R.layout.simple_spinner_item);
+    sortByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    sortBy.setAdapter(sortByAdapter);
 
-    public void getMovieData() {
+    getMovieData();
+    return rootView;
+  }
 
-        Call<Movie> movieCall =
-                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", "original_title.asc",false,
-                        1, null);
-        movieCall.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                if (response.isSuccessful()) {
-                    Movie movie = response.body();
-                    List<MovieResults> resultsList = movie.getResults();
-                    Log.d("MOVIE", "onResponse: " + resultsList.size());
+  public void getMovieData() {
 
-                    movieRecycler = rootView.findViewById(R.id.movie_rv);
-                    movieAdapter = new MovieAdapter(getContext(), resultsList);
-                    gridLayoutManager =
-                            new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
-                    movieRecycler.setAdapter(movieAdapter);
-                    movieRecycler.setLayoutManager(gridLayoutManager);
-                }
-            }
+    Call<Movie> movieCall = DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US",
+        "original_title.asc", false, 1, null);
+    movieCall.enqueue(new Callback<Movie>() {
+      @Override public void onResponse(Call<Movie> call, Response<Movie> response) {
+        if (response.isSuccessful()) {
+          Movie movie = response.body();
+          List<MovieResults> resultsList = movie.getResults();
+          Log.d("MOVIE", "onResponse: " + resultsList.size());
 
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                Log.d("MOVIE", "onFailure: " + call.request());
-                t.printStackTrace();
-            }
-        });
-    }
+          movieRecycler = rootView.findViewById(R.id.movie_rv);
+          movieAdapter = new MovieAdapter(getContext(), resultsList);
+          gridLayoutManager =
+              new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+          movieRecycler.setAdapter(movieAdapter);
+          movieRecycler.setLayoutManager(gridLayoutManager);
+        }
+      }
 
-    public void getMovieDataSort(String sortBy) {
+      @Override public void onFailure(Call<Movie> call, Throwable t) {
+        Log.d("MOVIE", "onFailure: " + call.request());
+        t.printStackTrace();
+      }
+    });
+  }
 
-        Call<Movie> movieCall =
-                DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", sortBy,false,
-                        1, null);
-        movieCall.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                if (response.isSuccessful()) {
-                    Movie movie = response.body();
-                    List<MovieResults> resultsList = movie.getResults();
-                    Log.d("MOVIE", "onResponse: " + resultsList.size());
+  public void getMovieDataSort(String sortBy) {
 
-                    movieRecycler = rootView.findViewById(R.id.movie_rv);
-                    movieAdapter = new MovieAdapter(getContext(), resultsList);
-                    gridLayoutManager =
-                            new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
-                    movieRecycler.setAdapter(movieAdapter);
+    Call<Movie> movieCall =
+        DBCallback.getMovieDiscover("1c04b2b1399d2443d6f781d6c5fd6119", "en-US", sortBy, false, 1,
+            null);
+    movieCall.enqueue(new Callback<Movie>() {
+      @Override public void onResponse(Call<Movie> call, Response<Movie> response) {
+        if (response.isSuccessful()) {
+          Movie movie = response.body();
+          List<MovieResults> resultsList = movie.getResults();
 
-                    if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
-                    } else {
-                        movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 4));
-                    }                }
-            }
+          movieRecycler = rootView.findViewById(R.id.movie_rv);
+          movieAdapter = new MovieAdapter(getContext(), resultsList);
+          gridLayoutManager =
+              new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+          movieRecycler.setAdapter(movieAdapter);
 
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                Log.d("MOVIE", "onFailure: " + call.request());
-                t.printStackTrace();
-            }
-        });
-    }
+          if (getActivity().getResources().getConfiguration().orientation
+              == Configuration.ORIENTATION_PORTRAIT) {
+            movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
+          } else {
+            movieRecycler.setLayoutManager(new GridLayoutManager(rootView.getContext(), 4));
+          }
+        }
+      }
+
+      @Override public void onFailure(Call<Movie> call, Throwable t) {
+        Log.d("MOVIE", "onFailure: " + call.request());
+        t.printStackTrace();
+      }
+    });
+  }
 }
