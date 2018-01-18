@@ -1,10 +1,10 @@
 package nyc.c4q.MovieDBUserTest.API;
-
 /**
  * Created by c4q on 1/8/18.
  */
 
 import android.content.res.Resources;
+import android.widget.Spinner;
 import nyc.c4q.MovieDBUserTest.Models.Movie;
 import nyc.c4q.MovieDBUserTest.Models.TV;
 import nyc.c4q.MovieDBUserTest.R;
