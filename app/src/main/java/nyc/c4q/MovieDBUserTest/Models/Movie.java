@@ -28,4 +28,5 @@ public class Movie {
   public int getTotal_pages() {
     return total_pages;
   }
+
 }

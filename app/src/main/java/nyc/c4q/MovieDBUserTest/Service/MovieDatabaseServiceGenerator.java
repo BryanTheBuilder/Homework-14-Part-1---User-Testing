@@ -1,5 +1,6 @@
 package nyc.c4q.MovieDBUserTest.Service;
 
+import nyc.c4q.MovieDBUserTest.API.MovieDBService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,13 +24,13 @@ public class MovieDatabaseServiceGenerator {
 
   private static OkHttpClient.Builder okhttpclient = new OkHttpClient.Builder();
 
-  public static <T> T createService(Class<T> serviceClass) {
+  public static MovieDBService createService() {
     if (!okhttpclient.interceptors().contains(loggingInterceptor)) {
       okhttpclient.addInterceptor(loggingInterceptor);
       builder.client(okhttpclient.build());
       retrofit = builder.build();
     }
-    return retrofit.create(serviceClass);
+    return retrofit.create(MovieDBService.class);
   }
 
 }
