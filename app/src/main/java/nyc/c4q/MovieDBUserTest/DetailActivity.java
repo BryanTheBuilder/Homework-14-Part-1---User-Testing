@@ -2,6 +2,7 @@ package nyc.c4q.MovieDBUserTest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
@@ -9,7 +10,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import java.util.List;
 import nyc.c4q.MovieDBUserTest.Models.MovieReview;
+import nyc.c4q.MovieDBUserTest.Models.MovieReviewDisplay;
+import nyc.c4q.MovieDBUserTest.controller.ReviewAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
   private ImageView poster;
   private RatingBar ratingBar;
   private RecyclerView reviewRecycler;
+  private ReviewAdapter reviewAdapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -75,6 +80,12 @@ public class DetailActivity extends AppCompatActivity {
     movieReviewCall.enqueue(new Callback<MovieReview>() {
       @Override public void onResponse(Call<MovieReview> call, Response<MovieReview> response) {
 
+        List<MovieReviewDisplay> movieReviewDisplays = response.body().getResults();
+        reviewRecycler = findViewById(R.id.movie_reviews_rv);
+        reviewAdapter = new ReviewAdapter(movieReviewDisplays);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        reviewRecycler.setAdapter(reviewAdapter);
+        reviewRecycler.setLayoutManager(linearLayoutManager);
       }
 
       @Override public void onFailure(Call<MovieReview> call, Throwable t) {
