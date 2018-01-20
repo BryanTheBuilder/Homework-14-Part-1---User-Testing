@@ -52,6 +52,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
                 goToDetailActivity.putExtra("poster", fullImagePath.toString());
                 goToDetailActivity.putExtra("votes",results.getVote_count());
                 goToDetailActivity.putExtra("lang",results.getOriginal_language());
+                goToDetailActivity.putExtra("Tv", "notTv");
 
 
                 itemView.getContext().startActivity(goToDetailActivity);

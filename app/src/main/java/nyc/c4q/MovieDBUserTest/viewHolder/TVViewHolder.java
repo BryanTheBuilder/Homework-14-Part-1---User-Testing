@@ -56,6 +56,7 @@ public class TVViewHolder extends RecyclerView.ViewHolder {
                     }
                 }
                 goToDetailActivity.putExtra("country", countryList.toString());
+                goToDetailActivity.putExtra("Tv", "isTV");
                 itemView.getContext().startActivity(goToDetailActivity);
             }
         });

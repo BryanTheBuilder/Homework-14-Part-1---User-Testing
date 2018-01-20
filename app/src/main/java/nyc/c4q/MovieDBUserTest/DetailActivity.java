@@ -55,6 +55,7 @@ public class DetailActivity extends AppCompatActivity {
     voteCount = findViewById(R.id.detail_votes);
     language = findViewById(R.id.detail_language);
     country = findViewById(R.id.detail_country);
+
     reviewRecycler = findViewById(R.id.movie_reviews_rv);
     getIntents();
   }
@@ -70,7 +71,9 @@ public class DetailActivity extends AppCompatActivity {
     language.setText(extras.getString("lang").toUpperCase());
     country.setText(extras.getString("country"));
     Picasso.with(getBaseContext()).load(extras.getString("poster")).into(poster);
-    loadReviews(extras.getInt("movie_id"));
+    if (extras.getString("Tv") == "isTV") {
+      loadReviews(extras.getInt("movie_id"));
+    }
   }
 
   private void loadReviews(int movie_id) {
@@ -83,7 +86,8 @@ public class DetailActivity extends AppCompatActivity {
         List<MovieReviewDisplay> movieReviewDisplays = response.body().getResults();
         reviewRecycler = findViewById(R.id.movie_reviews_rv);
         reviewAdapter = new ReviewAdapter(movieReviewDisplays);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager =
+            new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         reviewRecycler.setAdapter(reviewAdapter);
         reviewRecycler.setLayoutManager(linearLayoutManager);
       }
